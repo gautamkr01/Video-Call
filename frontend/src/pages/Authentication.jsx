@@ -7,11 +7,14 @@ import {
     Paper,
     Box,
     Typography,
-    Snackbar
+    Snackbar,
+    IconButton
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -24,6 +27,7 @@ export default function Authentication() {
     const [formState, setFormState] = React.useState(0);
     const [open, setOpen] = React.useState(false);
 
+    const navigate = useNavigate();
     const { handleRegister, handleLogin } = React.useContext(AuthContext);
 
     const handleAuth = async () => {
@@ -51,7 +55,7 @@ export default function Authentication() {
             <Box
                 sx={{
                     minHeight: '100vh',
-                    background: 'linear-gradient(135deg, #0f0f0f, #1a1a1a)',
+                    background: 'linear-gradient(135deg, #e0c3fc, #8ec5fc)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -59,24 +63,49 @@ export default function Authentication() {
                 }}
             >
                 <Paper
-                    elevation={6}
+                    elevation={8}
                     sx={{
                         width: '100%',
-                        maxWidth: 400,
+                        maxWidth: 420,
                         p: 4,
-                        backgroundColor: '#121212',
-                        color: 'white',
-                        borderRadius: 2,
+                        backgroundColor: 'white',
+                        color: '#333',
+                        borderRadius: 3,
+                        position: 'relative',
                     }}
                 >
+                    {/* Back Button */}
+                    <IconButton
+                        onClick={() => navigate('/')}
+                        sx={{
+                            position: 'absolute',
+                            top: 12,
+                            left: 12,
+                            backgroundColor: '#f0f0f0',
+                            '&:hover': {
+                                backgroundColor: '#e0e0e0',
+                            },
+                        }}
+                        size="small"
+                    >
+                        <ArrowBackIcon />
+                    </IconButton>
+
                     <Box
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
+                            mt: 2
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <Avatar
+                            sx={{
+                                m: 1,
+                                bgcolor: 'linear-gradient(135deg, #42a5f5, #7e57c2)',
+                                background: 'linear-gradient(135deg, #42a5f5, #7e57c2)'
+                            }}
+                        >
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
@@ -88,6 +117,15 @@ export default function Authentication() {
                                 variant={formState === 0 ? 'contained' : 'outlined'}
                                 onClick={() => setFormState(0)}
                                 fullWidth
+                                sx={{
+                                    textTransform: 'none',
+                                    bgcolor: formState === 0 ? '#42a5f5' : 'white',
+                                    color: formState === 0 ? 'white' : '#42a5f5',
+                                    borderColor: '#42a5f5',
+                                    '&:hover': {
+                                        bgcolor: formState === 0 ? '#1e88e5' : '#e3f2fd'
+                                    }
+                                }}
                             >
                                 Login
                             </Button>
@@ -95,6 +133,15 @@ export default function Authentication() {
                                 variant={formState === 1 ? 'contained' : 'outlined'}
                                 onClick={() => setFormState(1)}
                                 fullWidth
+                                sx={{
+                                    textTransform: 'none',
+                                    bgcolor: formState === 1 ? '#7e57c2' : 'white',
+                                    color: formState === 1 ? 'white' : '#7e57c2',
+                                    borderColor: '#7e57c2',
+                                    '&:hover': {
+                                        bgcolor: formState === 1 ? '#673ab7' : '#ede7f6'
+                                    }
+                                }}
                             >
                                 Register
                             </Button>
@@ -108,8 +155,7 @@ export default function Authentication() {
                                     label="Full Name"
                                     value={name}
                                     onChange={e => setName(e.target.value)}
-                                    InputProps={{ style: { color: 'white' } }}
-                                    InputLabelProps={{ style: { color: 'white' } }}
+                                    variant="outlined"
                                 />
                             )}
 
@@ -119,8 +165,7 @@ export default function Authentication() {
                                 label="Username"
                                 value={username}
                                 onChange={e => setUsername(e.target.value)}
-                                InputProps={{ style: { color: 'white' } }}
-                                InputLabelProps={{ style: { color: 'white' } }}
+                                variant="outlined"
                             />
                             <TextField
                                 margin="normal"
@@ -129,8 +174,7 @@ export default function Authentication() {
                                 type="password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                InputProps={{ style: { color: 'white' } }}
-                                InputLabelProps={{ style: { color: 'white' } }}
+                                variant="outlined"
                             />
 
                             {error && (
@@ -143,7 +187,16 @@ export default function Authentication() {
                                 type="button"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{
+                                    mt: 3,
+                                    mb: 2,
+                                    textTransform: 'none',
+                                    background: 'linear-gradient(45deg, #42a5f5, #7e57c2)',
+                                    color: 'white',
+                                    '&:hover': {
+                                        background: 'linear-gradient(45deg, #1e88e5, #5e35b1)'
+                                    }
+                                }}
                                 onClick={handleAuth}
                             >
                                 {formState === 0 ? 'Login' : 'Register'}
