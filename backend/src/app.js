@@ -26,9 +26,9 @@ const start = async () => {
         'mongodb+srv://gautamkumark001:QOfL3YhdT4ngNTve@cluster1.we1msm1.mongodb.net/'
     );
 
-    console.log(`MONGO Connected DB HOst: ${connectionDb.connection.host}`);
+    console.log(`MONGO Connected DB Host: ${connectionDb.connection.host}`);
     server.listen(app.get('port'), () => {
-        console.log('LISTENIN ON PORT 8000');
+        console.log('LISTENING ON PORT 8000');
     });
 };
 
