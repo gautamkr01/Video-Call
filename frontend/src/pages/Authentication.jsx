@@ -1,94 +1,76 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import {
+    Avatar,
+    Button,
+    CssBaseline,
+    TextField,
+    Paper,
+    Box,
+    Typography,
+    Snackbar
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthContext } from '../contexts/AuthContext';
-import { Snackbar } from '@mui/material';
 
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+const theme = createTheme();
 
 export default function Authentication() {
-
-    
-
-    const [username, setUsername] = React.useState();
-    const [password, setPassword] = React.useState();
-    const [name, setName] = React.useState();
-    const [error, setError] = React.useState();
-    const [message, setMessage] = React.useState();
-
-
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [error, setError] = React.useState('');
+    const [message, setMessage] = React.useState('');
     const [formState, setFormState] = React.useState(0);
-
-    const [open, setOpen] = React.useState(false)
-
+    const [open, setOpen] = React.useState(false);
 
     const { handleRegister, handleLogin } = React.useContext(AuthContext);
 
-    let handleAuth = async () => {
+    const handleAuth = async () => {
         try {
             if (formState === 0) {
-
-                let result = await handleLogin(username, password)
-
-
-            }
-            if (formState === 1) {
-                let result = await handleRegister(name, username, password);
-                console.log(result);
-                setUsername("");
+                await handleLogin(username, password);
+            } else {
+                const result = await handleRegister(name, username, password);
+                setUsername('');
+                setPassword('');
                 setMessage(result);
                 setOpen(true);
-                setError("")
-                setFormState(0)
-                setPassword("")
+                setError('');
+                setFormState(0);
             }
         } catch (err) {
-
-            console.log(err);
-            let message = (err.response.data.message);
-            setError(message);
+            const msg = err?.response?.data?.message || 'Authentication error';
+            setError(msg);
         }
-    }
-
+    };
 
     return (
-        <ThemeProvider theme={defaultTheme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
-                <Grid
-                    item
-                    xs={false}
-                    sm={4}
-                    md={7}
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Box
+                sx={{
+                    minHeight: '100vh',
+                    background: 'linear-gradient(135deg, #0f0f0f, #1a1a1a)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    p: 2,
+                }}
+            >
+                <Paper
+                    elevation={6}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
+                        width: '100%',
+                        maxWidth: 400,
+                        p: 4,
+                        backgroundColor: '#121212',
+                        color: 'white',
+                        borderRadius: 2,
                     }}
-                />
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                >
                     <Box
                         sx={{
-                            my: 8,
-                            mx: 4,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -97,56 +79,65 @@ export default function Authentication() {
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                             <LockOutlinedIcon />
                         </Avatar>
+                        <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
+                            {formState === 0 ? 'Sign In' : 'Sign Up'}
+                        </Typography>
 
-
-                        <div>
-                            <Button variant={formState === 0 ? "contained" : ""} onClick={() => { setFormState(0) }}>
-                                Sign In
+                        <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
+                            <Button
+                                variant={formState === 0 ? 'contained' : 'outlined'}
+                                onClick={() => setFormState(0)}
+                                fullWidth
+                            >
+                                Login
                             </Button>
-                            <Button variant={formState === 1 ? "contained" : ""} onClick={() => { setFormState(1) }}>
-                                Sign Up
+                            <Button
+                                variant={formState === 1 ? 'contained' : 'outlined'}
+                                onClick={() => setFormState(1)}
+                                fullWidth
+                            >
+                                Register
                             </Button>
-                        </div>
+                        </Box>
 
                         <Box component="form" noValidate sx={{ mt: 1 }}>
-                            {formState === 1 ? <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="username"
-                                label="Full Name"
-                                name="username"
-                                value={name}
-                                autoFocus
-                                onChange={(e) => setName(e.target.value)}
-                            /> : <></>}
+                            {formState === 1 && (
+                                <TextField
+                                    margin="normal"
+                                    fullWidth
+                                    label="Full Name"
+                                    value={name}
+                                    onChange={e => setName(e.target.value)}
+                                    InputProps={{ style: { color: 'white' } }}
+                                    InputLabelProps={{ style: { color: 'white' } }}
+                                />
+                            )}
 
                             <TextField
                                 margin="normal"
-                                required
                                 fullWidth
-                                id="username"
                                 label="Username"
-                                name="username"
                                 value={username}
-                                autoFocus
-                                onChange={(e) => setUsername(e.target.value)}
-
+                                onChange={e => setUsername(e.target.value)}
+                                InputProps={{ style: { color: 'white' } }}
+                                InputLabelProps={{ style: { color: 'white' } }}
                             />
                             <TextField
                                 margin="normal"
-                                required
                                 fullWidth
-                                name="password"
                                 label="Password"
-                                value={password}
                                 type="password"
-                                onChange={(e) => setPassword(e.target.value)}
-
-                                id="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                InputProps={{ style: { color: 'white' } }}
+                                InputLabelProps={{ style: { color: 'white' } }}
                             />
 
-                            <p style={{ color: "red" }}>{error}</p>
+                            {error && (
+                                <Typography color="error" sx={{ mt: 1 }}>
+                                    {error}
+                                </Typography>
+                            )}
 
                             <Button
                                 type="button"
@@ -155,21 +146,14 @@ export default function Authentication() {
                                 sx={{ mt: 3, mb: 2 }}
                                 onClick={handleAuth}
                             >
-                                {formState === 0 ? "Login " : "Register"}
+                                {formState === 0 ? 'Login' : 'Register'}
                             </Button>
-
                         </Box>
                     </Box>
-                </Grid>
-            </Grid>
+                </Paper>
 
-            <Snackbar
-
-                open={open}
-                autoHideDuration={4000}
-                message={message}
-            />
-
+                <Snackbar open={open} autoHideDuration={4000} message={message} />
+            </Box>
         </ThemeProvider>
     );
 }

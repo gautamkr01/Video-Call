@@ -15,7 +15,7 @@ export default function LandingPage() {
                 </div>
                 <div className='navlist'>
                     <p onClick={() => {
-                        router("/aljk23")
+                        router("/gautamkr")
                     }}>Join as Guest</p>
                     <p onClick={() => {
                         router("/auth")
@@ -33,15 +33,15 @@ export default function LandingPage() {
 
             <div className="landingMainContainer">
                 <div>
-                    <h1><span style={{ color: "#FF9839" }}>Connect</span> with your loved Ones<sup>by Gautam</sup></h1>
+                    <h1><span style={{ color: "#FF9839"}}>Connect</span> with your loved Ones</h1>
 
-                    <p>Cover a distance by Easy Meet Video Call </p>
+                    <p style={{paddingTop: "1rem"}}>Cover a distance by Easy Meet Video Call </p>
                     
-                    <div role='button'>
+                    <div role='button' className='getStarted'>
                         <Link to={"/auth"}>Get Started</Link>
                     </div>
                 </div>
-                <div>
+                <div className='mobileImage'>
 
                     <img src="/mobile.png" alt="" />
 
