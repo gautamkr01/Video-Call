@@ -198,6 +198,7 @@
     background: rgb(1, 4, 48);
     color: white;
     background: url('/background.png');
+    background-size: cover;
 }
 
 .enterIntoLobbyContainer nav {

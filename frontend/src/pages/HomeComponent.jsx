@@ -17,9 +17,9 @@ function HomeComponent() {
     };
 
     return (
-        <>
+        <div className="homeComponent">
             <div className="navBar">
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: 'clamp(0.1rem, 1vw, 2rem)' }}>
                     <h2>Easy Meet</h2>
                 </div>
 
@@ -29,16 +29,17 @@ function HomeComponent() {
                         onClick={() => navigate('/history')}
                     >
                         <IconButton>
-                            <RestoreIcon />
+                            <RestoreIcon sx={{ color: 'white' }} />
                         </IconButton>
-                        <p style={{  }}>History</p>
+                        <p style={{ color: 'white' }}>History</p>
                     </div>
 
                     <Button
                         onClick={() => {
                             localStorage.removeItem('token');
-                            navigate('/auth');
+                            navigate('/');
                         }}
+                        style={{color:"red"}}
                     >
                         Logout
                     </Button>
@@ -48,7 +49,9 @@ function HomeComponent() {
             <div className="meetContainer">
                 <div className="leftPanel">
                     <div>
-                        <h2>Providing Quality Video Call Just Like Quality Education</h2>
+                        <h2 style={{ paddingBottom: '50px' }}>
+                            Providing Quality Video Call Just Like Quality Education
+                        </h2>
 
                         <div style={{ display: 'flex', gap: '10px' }}>
                             <TextField
@@ -56,6 +59,21 @@ function HomeComponent() {
                                 id="outlined-basic"
                                 label="Meeting Code"
                                 variant="outlined"
+                                sx={{
+                                    input: { color: 'white' },
+                                    label: { color: 'white' },
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'white'
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'white'
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: 'white'
+                                        }
+                                    }
+                                }}
                             />
                             <Button onClick={handleJoinVideoCall} variant="contained">
                                 Join
@@ -64,10 +82,10 @@ function HomeComponent() {
                     </div>
                 </div>
                 <div className="rightPanel">
-                    <img srcSet="/logo3.png" alt="" />
+                    <video autoPlay muted controls src="/demoVideo.mp4"></video>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

@@ -24,7 +24,8 @@ const login = async (req, res) => {
 
             user.token = token;
             await user.save();
-            return res.status(httpStatus.OK).json({ token: token });
+            console.log("token: " +token, "username:" + username);
+            return res.status(httpStatus.OK).json({ token: token, username: username });
         } else {
             return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Invalid Username or password' });
         }
@@ -53,17 +54,6 @@ const register = async (req, res) => {
         await newUser.save();
 
         res.status(httpStatus.CREATED).json({ message: 'User Registered' });
-    } catch (e) {
-        res.json({ message: `Something went wrong ${e}` });
-    }
-};
-
-const getUserName = async (req, res) => {
-    const { token } = req.query;
-
-    try {
-        const user = await User.findOne({ token: token });
-        res.json(user);
     } catch (e) {
         res.json({ message: `Something went wrong ${e}` });
     }
@@ -100,4 +90,4 @@ const addToHistory = async (req, res) => {
     }
 };
 
-export { login, register, getUserHistory, addToHistory, getUserName };
+export { login, register, getUserHistory, addToHistory };

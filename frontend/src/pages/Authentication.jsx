@@ -1,20 +1,11 @@
 import * as React from 'react';
-import {
-    Avatar,
-    Button,
-    CssBaseline,
-    TextField,
-    Paper,
-    Box,
-    Typography,
-    Snackbar,
-    IconButton
-} from '@mui/material';
+import { Avatar, Button, CssBaseline, TextField, Paper, Box, Typography, Snackbar, IconButton } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+
 
 const theme = createTheme();
 
@@ -55,11 +46,13 @@ export default function Authentication() {
             <Box
                 sx={{
                     minHeight: '100vh',
-                    background: 'linear-gradient(135deg, #e0c3fc, #8ec5fc)',
+                    backgroundImage: `url('/background.png')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    p: 2,
+                    p: 2
                 }}
             >
                 <Paper
@@ -71,7 +64,7 @@ export default function Authentication() {
                         backgroundColor: 'white',
                         color: '#333',
                         borderRadius: 3,
-                        position: 'relative',
+                        position: 'relative'
                     }}
                 >
                     {/* Back Button */}
@@ -83,8 +76,8 @@ export default function Authentication() {
                             left: 12,
                             backgroundColor: '#f0f0f0',
                             '&:hover': {
-                                backgroundColor: '#e0e0e0',
-                            },
+                                backgroundColor: '#e0e0e0'
+                            }
                         }}
                         size="small"
                     >

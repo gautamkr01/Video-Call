@@ -1,4 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+
 import io from 'socket.io-client';
 import { Badge, IconButton, TextField } from '@mui/material';
 import { Button } from '@mui/material';
@@ -58,6 +62,8 @@ export default function VideoMeetComponent() {
     const videoRef = useRef([]);
 
     let [videos, setVideos] = useState([]);
+
+    const { userData } = useContext(AuthContext);
 
     // TODO
     // if(isChrome() === false) {
@@ -495,7 +501,8 @@ export default function VideoMeetComponent() {
             let tracks = localVideoref.current.srcObject.getTracks();
             tracks.forEach(track => track.stop());
         } catch (e) {}
-        window.location.href = '/home';
+
+        window.location.href = '/';
     };
 
     let openChat = () => {
@@ -548,6 +555,7 @@ export default function VideoMeetComponent() {
                                 value={username}
                                 onChange={e => setUsername(e.target.value)}
                                 variant="outlined"
+                                required
                                 sx={{
                                     mr: '1.2rem',
                                     mb: '1.2rem',
@@ -677,6 +685,9 @@ export default function VideoMeetComponent() {
 
                     {/* Fixed user video */}
                     <video className={styles.meetUserVideo} ref={localVideoref} autoPlay muted></video>
+                    
+
+                    {<p>{userData.username}</p>}
                 </div>
             )}
         </div>

@@ -52,6 +52,11 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const isLoggedIn = () => {
+        const token = localStorage.getItem('token');
+        return !!token; // true if token exists
+    };
+
     const getHistoryOfUser = async () => {
         try {
             let request = await client.get('/get_all_activity', {
@@ -97,7 +102,8 @@ export const AuthProvider = ({ children }) => {
         getHistoryOfUser,
         handleRegister,
         handleLogin,
-        getUserName
+        getUserName,
+        isLoggedIn
     };
 
     return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

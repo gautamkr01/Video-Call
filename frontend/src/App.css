@@ -1,104 +1,100 @@
 .landingPageContainer {
-  width: 100vw;
-  height: 100vh;
-  background: url("/background.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
+    width: 100vw;
+    height: 100vh;
+    background: url('/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 }
 
-
 .landingPageContainer nav {
-  padding-inline: 1.2rem;
-  padding-block: 1.6rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+    padding-inline: 1.2rem;
+    padding-block: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .landingPageContainer nav h2 {
-  font-size: 1.8rem;
-  font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 500;
 }
 
 .landingPageContainer nav .navlist {
-  display: flex;
-  gap: 1.6rem;
-  cursor: pointer;
-
+    display: flex;
+    gap: 1.6rem;
+    cursor: pointer;
 }
 
 .landingMainContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
 }
 
 .mobileImage img {
-  object-fit: contain;
-  max-width: 100%;
+    object-fit: contain;
+    max-width: 100%;
 }
 
-
-
-.landingMainContainer>div:nth-child(1) {
-  font-size: clamp(0.1rem, 2vw, 2rem);
+.landingMainContainer > div:nth-child(1) {
+    font-size: clamp(0.1rem, 2vw, 2rem);
 }
 
-
-.landingMainContainer>div:nth-child(1) div[role='button'] {
-  background: #D97500;
-  width: fit-content;
-  padding: 1rem;
-  border-radius: 20px;
-  margin-top: 1.9rem;
+.landingMainContainer > div:nth-child(1) div[role='button'] {
+    background: #d97500;
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 20px;
+    margin-top: 1.9rem;
 }
 
-.landingMainContainer>div:nth-child(1) div[role='button'] a {
-  text-decoration: none;
-  color: white;
-  font-size: clamp(0.1rem, 2vw, 1.7rem);
+.landingMainContainer > div:nth-child(1) div[role='button'] a {
+    text-decoration: none;
+    color: white;
+    font-size: clamp(0.1rem, 2vw, 1.7rem);
 }
 
-.landingMainContainer>div:nth-child(2) img {
-  height: 70vh;
-  width: auto;
+.landingMainContainer > div:nth-child(2) img {
+    height: 70vh;
+    width: auto;
+}
+.homeComponent {
+    color: white;
+    height: 100vh;
+    background: url('/background.png');
+    background-size: cover;
 }
 
 .navBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: 20px;
-  text-align: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    text-align: center;
 }
 .meetContainer {
-  display: flex;
-  padding-inline: 20px;
-  height: 80vh;
-  gap: 10vw;
-  justify-content: center;
+    display: flex;
+    padding-inline: 20px;
+    height: 80vh;
+    gap: 5vw;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-
-
 .leftPanel {
-  height: 100%;
-  display: flex;
-  align-items: center;
-
+    display: flex;
 }
 
 .rightPanel {
-  display: flex;
-  align-items: center;
+    display: flex;
+
+    height: fit-content;
 }
 
-.rightPanel > img {
-  width: 30vw;
-  height: auto;
-  border-radius: 20px;
+.rightPanel > video {
+    width: 350px;
+    border-radius: 20px;
 }
