@@ -670,11 +670,11 @@ export default function VideoMeetComponent() {
                             {audio ? <MicIcon /> : <MicOffIcon />}
                         </IconButton>
 
-                        {screenAvailable && (
+                        
                             <IconButton onClick={handleScreen} style={{ color: 'white' }}>
                                 {screen ? <ScreenShareIcon /> : <StopScreenShareIcon />}
                             </IconButton>
-                        )}
+                        
 
                         <Badge badgeContent={newMessages} max={999} color="orange">
                             <IconButton onClick={() => setModal(!showModal)} style={{ color: 'white' }}>
